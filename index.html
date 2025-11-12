@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiwi Navigator - Voice Navigation with Personality</title>
+
+    <!-- Mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+
+    <!-- Mapbox Geocoding API -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Main App Container -->
+    <div id="app">
+
+        <!-- Header -->
+        <header class="app-header">
+            <h1>🥝 Kiwi Navigator</h1>
+            <button id="voice-selector-btn" class="voice-btn">
+                <span id="current-voice-emoji">😎</span>
+                <span id="current-voice-name">Kiwi Mate</span>
+            </button>
+        </header>
+
+        <!-- Map Container -->
+        <div id="map"></div>
+
+        <!-- Search Overlay (shown on app open) -->
+        <div id="search-overlay" class="search-overlay">
+            <div class="search-container">
+                <div id="geocoder" class="geocoder-container"></div>
+                <p class="search-hint">🔍 Where to, mate?</p>
+            </div>
+        </div>
+
+        <!-- Navigation Panel (hidden until route calculated) -->
+        <div id="nav-panel" class="nav-panel hidden">
+            <div class="nav-info">
+                <div class="nav-destination">
+                    <span class="destination-icon">🎯</span>
+                    <span id="destination-name">Destination</span>
+                </div>
+                <div class="nav-stats">
+                    <span id="nav-distance">-- km</span>
+                    <span class="separator">•</span>
+                    <span id="nav-duration">-- min</span>
+                </div>
+            </div>
+            <button id="start-nav-btn" class="btn-primary">Start Navigation</button>
+        </div>
+
+        <!-- Active Navigation Panel (shown during navigation) -->
+        <div id="active-nav-panel" class="active-nav-panel hidden">
+            <div class="nav-instruction">
+                <div class="distance-to-turn" id="distance-to-turn">800m</div>
+                <div class="turn-arrow" id="turn-arrow">↑</div>
+                <div class="instruction-text" id="instruction-text">Head north on Main Street</div>
+            </div>
+
+            <div class="voice-status">
+                <span class="voice-avatar" id="nav-voice-avatar">😎</span>
+                <div class="voice-message" id="voice-message">Sweet as, let's get going!</div>
+            </div>
+
+            <div class="nav-progress">
+                <div class="progress-info">
+                    <span id="remaining-distance">3.2 km</span>
+                    <span class="separator">•</span>
+                    <span id="remaining-time">8 min</span>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <button id="mute-btn" class="btn-icon">🔊</button>
+                <button id="recenter-btn" class="btn-icon">📍</button>
+                <button id="end-nav-btn" class="btn-secondary">End Navigation</button>
+            </div>
+        </div>
+
+        <!-- Voice Selection Modal -->
+        <div id="voice-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Choose Your Co-Pilot</h2>
+                    <button class="modal-close" id="modal-close">×</button>
+                </div>
+                <div class="voice-options">
+                    <!-- Voice options populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Arrival Screen -->
+        <div id="arrival-screen" class="modal hidden">
+            <div class="modal-content arrival-content">
+                <div class="arrival-icon">🎉</div>
+                <h2>You've Arrived!</h2>
+                <p id="arrival-address">123 Queen Street, Auckland</p>
+                <div class="arrival-actions">
+                    <button id="rate-journey-btn" class="btn-primary">Rate This Journey</button>
+                    <button id="new-destination-btn" class="btn-secondary">New Destination</button>
+                </div>
+                <button class="modal-close" id="arrival-close">×</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- App Scripts -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/voice.js"></script>
+    <script src="scripts/map.js"></script>
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
